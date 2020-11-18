@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es5",
+        "lib": [
+            "es2015",
+            "es2017",
+            "dom"
+        ],
+        "outDir": "./",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/pixi-sound/pixi-sound.d.ts"
+        ],
+        "moduleResolution": "node"
+    },
+    "include": [
+        "./src/**/scripts",
+    ],
+    "exclude": [
+        // "./node_modules"
+        "dist"
+    ]
+}

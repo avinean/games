@@ -1,0 +1,1 @@
+export const CUSTOM_FONTS_NAMES = ['roboto-v20-latin-900italic','roboto-v20-latin-regular'];

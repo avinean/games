@@ -1,0 +1,39 @@
+{
+    "folders": [
+        {
+            "path": "./"
+        }
+    ],
+    "settings": {
+        "workbench.tree.indent": 18,
+        "editor.renderWhitespace": "all",
+        "eslint.autoFixOnSave": true,
+        "files.exclude": {
+            "node_modules/": true,
+            "package-lock.json": true
+        },
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "cSpell.userWords": [
+            "devtool",
+            "contenthash",
+            "playables",
+            "pixi",
+            "outro",
+            "gameplay"
+        ],
+        "search.showLineNumbers": true,
+        "search.exclude": {
+            "**/*base64": true
+        },
+        "search.useGlobalIgnoreFiles": true
+    },
+    "extensions": {
+        "recommendations": [
+            "streetsidesoftware.code-spell-checker",
+            "dbaeumer.vscode-eslint",
+            "pkief.material-icon-theme",
+        ]
+    }
+}
