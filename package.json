@@ -15,7 +15,8 @@
     "release": "npx webpack --config webpack/webpack.config.js -p --proj",
     "// ---------------------": "",
     "racing": "npm run build-res racing && npm run watch racing",
-    "knife": "npm run build-res knife && npm run watch knife"
+    "knife": "npm run build-res knife && npm run watch knife",
+    "rocket": "npm run build-res rocket && npm run watch rocket"
   },
   "keywords": [],
   "author": "",
