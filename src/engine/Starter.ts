@@ -1,19 +1,28 @@
 import * as PIXI from 'pixi.js';
 import TWEEN from 'tween.js';
 import Emitter from 'component-emitter';
-import appSettings from '../settings/appSettings';
+import { AppSize } from './models/GameConfigInterface';
 
 class Starter {
+    app = null;
+    _init = {
+        initPromise: new Promise(() => {}),
+        setInitiated: null,
+    };
+    size: AppSize = null;
+    _ticker: any;
+    emit: any;
+    tickerHandlersList: (() => void)[] = [];
+
     constructor() {
-        this.app = null;
-
-        this._init = {};
-
         this._init.initPromise = new Promise(resolve => {
             this._init.setInitiated = resolve;
         });
 
-        this.size = { ...appSettings.app };
+        this.size = {
+            width: 960,
+            height: 960,
+        };
 
         new Emitter(this);
     }
@@ -29,13 +38,14 @@ class Starter {
             width,
             height,
             transparent: true,
-            view,
+            view: view as any,
         });
         container.appendChild(this.app.view);
 
         this._ticker = new PIXI.Ticker();
         this._ticker.start();
         this._ticker.add(() => {
+            this.tickerHandlersList.forEach(cb => cb());
             TWEEN.update();
         });
 
@@ -100,6 +110,4 @@ class Starter {
     }
 }
 
-const starter = new Starter();
-
-export default starter;
+export default new Starter();
