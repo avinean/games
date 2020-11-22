@@ -1,5 +1,5 @@
 import TWEEN from 'tween.js';
-import GraphicsHelper from '../utils/GraphicsHelper';
+import GraphicsHelper from '../../../engine/utils/GraphicsHelper';
 import buttonsDescription from '../settings/buttonsDescription.ts';
 import { ButtonBGEnum } from '../models/enums/ButtonBGEnum';
 

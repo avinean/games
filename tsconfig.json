@@ -8,6 +8,7 @@
             "dom"
         ],
         "outDir": "./",
+        "baseUrl": "./",
         "noImplicitAny": false,
         "removeComments": true,
         "preserveConstEnums": true,
@@ -26,5 +27,13 @@
     "exclude": [
         // "./node_modules"
         "dist"
-    ]
+    ],
+    "paths": {
+        "@root/*": ["*"],
+        "@/*": ["src/*"],
+        "@engine/*": ["src/engine/*"],
+        "@root": ["/"],
+        "@": ["src/"],
+        "@engine": ["src/engine/"]
+    }
 }

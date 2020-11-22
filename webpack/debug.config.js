@@ -15,7 +15,7 @@ module.exports = rootPath => ({
     // },
     devtool: 'inline-source-map',
 
-    entry: path.resolve(rootPath, 'scripts', 'index.js'),
+    entry: path.resolve(rootPath, 'index.ts'),
 
     output: {
         filename: 'main.js?hash=[contenthash]',
@@ -102,7 +102,9 @@ module.exports = rootPath => ({
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
+            '@': path.resolve(rootPath, '..'),
             '@root': path.resolve(rootPath, '..'/* , '@common' */),
+            '@engine': path.resolve(rootPath, '..', 'engine'),
             '@scripts': path.resolve(rootPath, 'scripts'),
             '@assets': path.resolve(rootPath, 'assets', '_base64'),
         },

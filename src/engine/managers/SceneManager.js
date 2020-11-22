@@ -5,6 +5,8 @@ class SceneManager {
     }
 
     showScene(name, data) {
+        console.log(this._scenes);
+        console.log(this._scenes[name]);
         const targetScene = this._scenes[name];
 
         if (!targetScene) {

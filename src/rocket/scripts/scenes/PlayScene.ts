@@ -1,50 +1,38 @@
-import starter from '../engine/Starter';
-import GraphicsHelper from '../utils/GraphicsHelper';
-import Resizable from '../engine/Resizable';
-import {Container, Sprite} from 'pixi.js';
-import {BackgroundEnums} from '../models/enums/BackgroundEnums';
-import {ElementsEnum} from '../models/enums/ElementsEnum';
-import {DirectionsEnum} from '../models/enums/DirectionsEnum';
-import Button from '../components/Button';
-import {ButtonTypesEnum} from '../models/enums/ButtonTypesEnum';
-import SceneManager from '../managers/SceneManager';
-import {ScenesEnum} from '../models/enums/ScenesEnum';
+import Component from '@engine/Component';
 
-class PlayScene extends Resizable {
-    private _container: Container;
-    private _background: Sprite;
-    // _playButton: Button;
-    private _rocket: Sprite;
-    private _rocketConfig = {
+import { BackgroundEnums } from '../models/enums/BackgroundEnums';
+import { ElementsEnum } from '../models/enums/ElementsEnum';
+import { DirectionsEnum } from '../models/enums/DirectionsEnum';
+import Button from '../components/Button';
+import { ButtonTypesEnum } from '../models/enums/ButtonTypesEnum';
+import { ScenesEnum } from '../models/enums/ScenesEnum';
+
+class PlayScene extends Component {
+    _background;
+    _rocket;
+    _rocketConfig = {
         name: ElementsEnum.Rocket,
         anchor: 0.5,
         width: 75,
         height: 150
     };
-    private _rocketPosition = null;
-    private _rocketDirection  = DirectionsEnum.Top;
+    _rocketStep = 3;
+    _rocketPosition = null;
+    _rocketDirection  = DirectionsEnum.Top;
 
-    private _arrowLeft;
-    private _arrowRight;
-    private _arrowTop;
-    private _arrowBottom;
+    _arrowLeft;
+    _arrowRight;
+    _arrowTop;
+    _arrowBottom;
+    _moveRocketBind;
 
-    // TODO, move data to other location.
-    private _POSITION_INFO = {
-        components: {
-            counterOffsetX: 170,
-            counterOffsetY: 70
-        }
-    };
 
     constructor() {
         super();
-        this._init();
     }
 
     onResize(): void {
-        const { width, height } = starter.app.screen;
-        const { counterOffsetX, counterOffsetY } = this._POSITION_INFO.components;
+        const { width, height } = this.starter.app.screen;
 
         this._background.position.set(width / 2, height / 2);
         this._rocket.position.set(this._rocketPosition.x, this._rocketPosition.y);
@@ -55,22 +43,21 @@ class PlayScene extends Resizable {
         this._arrowBottom.container.position.set(512, 128)
     }
 
-    show(): void {
+    onShow(): void {
         this._restartGame();
-        this._container.visible = true;
     }
 
-    hide(): void {
-        this._container.visible = false;
+    onTick(): void {
+        this._moveRocket();
     }
 
-    _init(): void {
-        const { width, height } = starter.app.screen;
+    onInit(): void {
+        const { width, height } = this.starter.app.screen;
 
-        this._container = GraphicsHelper.createContainer({});
-        this._container.setParent(starter.app.stage);
+        this._container = this.graphicsHelper.createContainer({});
+        this._container.setParent(this.starter.app.stage);
 
-        this._background = GraphicsHelper.createSprite({
+        this._background = this.graphicsHelper.createSprite({
             name: BackgroundEnums.MainSceneBackground,
             anchor: 0.5,
         });
@@ -108,23 +95,22 @@ class PlayScene extends Resizable {
             }
         });
 
-
-        this._rocket = GraphicsHelper.createSprite(this._rocketConfig);
+        this._rocketConfig = {
+            name: ElementsEnum.Rocket,
+            anchor: 0.5,
+            width: 75,
+            height: 150
+        };
+        this._rocket = this.graphicsHelper.createSprite(this._rocketConfig);
         this._rocketPosition = {
             x: width / 2,
             y: height / 2,
         };
         this._container.addChild(this._rocket);
-
-        starter.ticker.add(() => {
-            if (!this._container.visible) return;
-           this._moveRocket();
-        });
-
     }
 
     _restartGame() {
-        const { width, height } = starter.app.screen;
+        const { width, height } = this.starter.app.screen;
         this._rocketPosition = {
             x: width / 2,
             y: height / 2,
@@ -141,20 +127,20 @@ class PlayScene extends Resizable {
 
         switch (this._rocketDirection) {
             case DirectionsEnum.Top:
-                this._rocketPosition.y--;
-                this._rocket.angle = 0;
+                this._rocketPosition.y -= this._rocketStep;
+                this._rocket.rotation = 0;
                 break;
             case DirectionsEnum.Right:
-                this._rocketPosition.x++;
-                this._rocket.angle = 90;
+                this._rocketPosition.x += this._rocketStep;
+                this._rocket.rotation = Math.PI / 2;
                 break;
             case DirectionsEnum.Bottom:
-                this._rocketPosition.y++;
-                this._rocket.angle = 180;
+                this._rocketPosition.y += this._rocketStep;
+                this._rocket.rotation = Math.PI;
                 break;
             case DirectionsEnum.Left:
-                this._rocketPosition.x--;
-                this._rocket.angle = 270;
+                this._rocketPosition.x -= this._rocketStep;
+                this._rocket.rotation = 3 * Math.PI / 2;
                 break;
         }
 
@@ -162,7 +148,7 @@ class PlayScene extends Resizable {
     }
 
     _checkBorders() {
-        const { width, height } = starter.app.screen;
+        const { width, height } = this.starter.app.screen;
         const { width: rWidth, height: rHeight } = this._rocketConfig;
         const { x, y } = this._rocketPosition;
         const rocketRadius = Math.max(rWidth, rHeight) / 2;
@@ -173,9 +159,8 @@ class PlayScene extends Resizable {
             (y - rocketRadius) < 0 ||
             (y + rocketRadius) > height
         ) {
-            SceneManager.showScene(ScenesEnum.GameOver);
+            this.sceneManager.showScene(ScenesEnum.GameOver);
         }
-
     }
 }
 
