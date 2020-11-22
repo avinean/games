@@ -15,7 +15,7 @@ src/{project name}
         /audio
         /fonts
     scripts
-        index.js
+        index.ts
         ...
 
 
