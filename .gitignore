@@ -2,3 +2,4 @@
 dist/
 .jshintrc
 _base64/
+/.idea/
