@@ -8,8 +8,6 @@ class Component {
     readonly _sceneManager;
     _container;
 
-
-
     constructor() {
         this._starter = starterInstance;
         this._sceneManager = sceneManager;
@@ -23,7 +21,7 @@ class Component {
             this.onResize(data);
         });
 
-        this.starter.ticker.add(() => {
+        this.starter.on('onTick', () => {
             if (!this._container.visible) return;
             this.onTick();
         });
