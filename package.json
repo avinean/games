@@ -16,7 +16,8 @@
     "// ---------------------": "",
     "racing": "npm run build-res racing && npm run watch racing",
     "knife": "npm run build-res knife && npm run watch knife",
-    "rocket": "npm run build-res rocket && npm run watch rocket"
+    "rocket": "npm run build-res rocket && npm run watch rocket",
+    "space_arcade": "npm run build-res space_arcade && npm run watch space_arcade"
   },
   "keywords": [],
   "author": "",

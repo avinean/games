@@ -1,4 +1,5 @@
 import Component from '@engine/Component';
+import Store from '@engine/Store';
 
 import { BackgroundEnums } from '../models/enums/BackgroundEnums';
 import { ElementsEnum } from '../models/enums/ElementsEnum';
@@ -29,6 +30,9 @@ class PlayScene extends Component {
 
     constructor() {
         super();
+        Store.get('testStore').subscribe((value) => {
+            console.log('play scene', value)
+        })
     }
 
     onResize(): void {

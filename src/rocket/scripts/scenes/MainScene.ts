@@ -1,4 +1,5 @@
 import Component from '@engine/Component';
+import Store from '@engine/Store';
 
 import Button from '../components/Button';
 import { BackgroundEnums } from '../models/enums/BackgroundEnums';
@@ -13,6 +14,26 @@ class MainScene extends Component {
 
     constructor() {
         super();
+
+        let store = {
+            test: 123
+        };
+
+        Store
+            .registerStore('testStore')
+            .get('testStore').subscribe((value) => {
+                store = value
+                console.log(value);
+            });
+            
+        setInterval(() => {
+            
+            Store.set('testStore', {
+                ...store,
+                test: store.test + 1
+            })
+        }, 1000);
+
     }
 
     onResize() {
