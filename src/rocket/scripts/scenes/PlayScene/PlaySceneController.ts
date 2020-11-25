@@ -31,7 +31,7 @@ class PlaySceneController extends Component<any> {
     _moveRocketBind;
 
     mainSceneStoreModel: MainSceneStoreModel;
-    vTZJQi5s
+    
     constructor() {
         super();
         this.store
