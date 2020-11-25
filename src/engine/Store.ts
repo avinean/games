@@ -1,18 +1,17 @@
 import { Subject } from 'rxjs';
 import cloneDeep from 'clone-deep';
+import { StoreInterface } from './models/StoreInterface';
 
-class Store {
+class Store implements StoreInterface {
     private store = {};
-
-    private listenersList = {};
 
     registerStore(storeSectionName) {
         if (storeSectionName in this.store) {
             this.warning(storeSectionName + ' is already exist in store');
             return;
-        }     
+        }
 
-        const observer = new Subject();           
+        const observer = new Subject();
         this.store[storeSectionName] = {
             observer
         };
@@ -30,7 +29,7 @@ class Store {
             return;
         }
         const {
-            observer 
+            observer
         } = this.store[storeSectionName];
 
         observer.next(cloneDeep(storeSection));
@@ -49,7 +48,7 @@ class Store {
 
         return observer;
     }
-    
+
     warning(msg, value = undefined) {
         console.log(`[${msg}]`, value)
     }

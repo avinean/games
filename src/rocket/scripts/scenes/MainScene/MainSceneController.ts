@@ -1,36 +1,35 @@
-import Component from '@engine/Component';
-import Store from '@engine/Store';
+import Component from '../../../../engine/Component';
 
-import Button from '../components/Button';
-import { BackgroundEnums } from '../models/enums/BackgroundEnums';
-import { ButtonTypesEnum } from '../models/enums/ButtonTypesEnum';
-import { ScenesEnum } from '../models/enums/ScenesEnum';
+import Button from '../../components/Button';
+import { BackgroundEnums } from '../../models/enums/BackgroundEnums';
+import { ButtonTypesEnum } from '../../models/enums/ButtonTypesEnum';
+import { ScenesEnum } from '../../models/enums/ScenesEnum';
+import {
+    MainSceneStoreModel,
+    MainSceneStoreName,
+} from '../../models/types/MainSceneStoreModel';
+import MainSceneStore from './MainSceneStore';
 
-class MainScene extends Component {
+class MainSceneController extends Component<MainSceneStoreModel> {
     _background;
     _playButton;
+    model = new MainSceneStore();
 
     _time = 0;
 
     constructor() {
         super();
 
-        let store = {
-            test: 123
-        };
-
-        Store
-            .registerStore('testStore')
-            .get('testStore').subscribe((value) => {
-                store = value
-                console.log(value);
+        this.store
+            .get(MainSceneStoreName)
+            .subscribe((value: MainSceneStoreModel) => {
+                this.model = value;
             });
-            
+
         setInterval(() => {
-            
-            Store.set('testStore', {
-                ...store,
-                test: store.test + 1
+            this.store.set(MainSceneStoreName, {
+                ...this.model,
+                testValue: this.model.testValue + 1
             })
         }, 1000);
 
@@ -66,4 +65,4 @@ class MainScene extends Component {
     }
 }
 
-export default MainScene;
+export default MainSceneController;

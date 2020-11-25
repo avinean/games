@@ -22,7 +22,8 @@
         "moduleResolution": "node"
     },
     "include": [
-        "./src/**/scripts/*"
+        "./src/**/scripts/*",
+        "./src/engine/*"
     ],
     "exclude": [
         // "./node_modules"

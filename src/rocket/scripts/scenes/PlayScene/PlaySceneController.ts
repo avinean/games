@@ -1,14 +1,17 @@
-import Component from '@engine/Component';
-import Store from '@engine/Store';
+import Component from '../../../../engine/Component';
 
-import { BackgroundEnums } from '../models/enums/BackgroundEnums';
-import { ElementsEnum } from '../models/enums/ElementsEnum';
-import { DirectionsEnum } from '../models/enums/DirectionsEnum';
-import Button from '../components/Button';
-import { ButtonTypesEnum } from '../models/enums/ButtonTypesEnum';
-import { ScenesEnum } from '../models/enums/ScenesEnum';
+import { BackgroundEnums } from '../../models/enums/BackgroundEnums';
+import { ElementsEnum } from '../../models/enums/ElementsEnum';
+import { DirectionsEnum } from '../../models/enums/DirectionsEnum';
+import Button from '../../components/Button';
+import { ButtonTypesEnum } from '../../models/enums/ButtonTypesEnum';
+import { ScenesEnum } from '../../models/enums/ScenesEnum';
+import {
+    MainSceneStoreModel,
+    MainSceneStoreName,
+} from '../../models/types/MainSceneStoreModel';
 
-class PlayScene extends Component {
+class PlaySceneController extends Component<any> {
     _background;
     _rocket;
     _rocketConfig = {
@@ -27,12 +30,15 @@ class PlayScene extends Component {
     _arrowBottom;
     _moveRocketBind;
 
-
+    mainSceneStoreModel: MainSceneStoreModel;
+    vTZJQi5s
     constructor() {
         super();
-        Store.get('testStore').subscribe((value) => {
-            console.log('play scene', value)
-        })
+        this.store
+            .get(MainSceneStoreName)
+            .subscribe((value: MainSceneStoreModel) => {
+                console.log('play scene', value)
+            });
     }
 
     onResize(): void {
@@ -168,4 +174,4 @@ class PlayScene extends Component {
     }
 }
 
-export default PlayScene;
+export default PlaySceneController;
