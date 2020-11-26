@@ -29,7 +29,11 @@ class MainSceneController extends Component<MainSceneStoreModel> {
         setInterval(() => {
             this.store.set(MainSceneStoreName, {
                 ...this.model,
-                testValue: this.model.testValue + 1
+                testValue: this.model.testValue + 1,
+                tmp: {
+                    ...this.model.tmp,
+                    playScene: this.model.tmp.playScene + 10
+                }
             })
         }, 1000);
 

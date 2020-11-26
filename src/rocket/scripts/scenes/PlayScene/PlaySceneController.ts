@@ -1,4 +1,5 @@
 import Component from '../../../../engine/Component';
+import { pluck, distinctUntilChanged } from 'rxjs/operators';
 
 import { BackgroundEnums } from '../../models/enums/BackgroundEnums';
 import { ElementsEnum } from '../../models/enums/ElementsEnum';
@@ -31,12 +32,40 @@ class PlaySceneController extends Component<any> {
     _moveRocketBind;
 
     mainSceneStoreModel: MainSceneStoreModel;
-    vTZJQi5s
+
     constructor() {
         super();
+
+        /*
+        * for instance store looks like next object
+        * {
+        *   testValue = 0;
+        *
+        *   tmp: {
+        *    playScene: 1
+        *   }
+        * }
+        * */
+
+        // to get whole section use next example
+        this.store
+            // get section by registration mane
+            // section name usually defines in store interface file
+            // section registers usually in main.ts
+            .get(MainSceneStoreName)
+            .subscribe((value) => {
+                console.log('play scene', value)
+            });
+
+        // to get some exact field from store section
+        // can be used .pipe with plunk
         this.store
             .get(MainSceneStoreName)
-            .subscribe((value: MainSceneStoreModel) => {
+            .pipe(
+                pluck('tmp'),
+                distinctUntilChanged()
+            )
+            .subscribe((value) => {
                 console.log('play scene', value)
             });
     }

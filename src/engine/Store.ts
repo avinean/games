@@ -16,9 +16,9 @@ class Store implements StoreInterface {
             observer
         };
 
-        observer.subscribe((value) => {
-            this.warning(storeSectionName, value)
-        });
+        // observer.subscribe((value) => {
+        //     this.warning(storeSectionName, value)
+        // });
 
         return this;
     }
@@ -32,7 +32,7 @@ class Store implements StoreInterface {
             observer
         } = this.store[storeSectionName];
 
-        observer.next(cloneDeep(storeSection));
+        observer.next(storeSection);
 
         return this;
     }
