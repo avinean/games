@@ -12,7 +12,6 @@ class Starter {
     size: AppSize = null;
     _ticker: any;
     emit: any;
-    tickerHandlersList: (() => void)[] = [];
 
     constructor() {
         this._init.initPromise = new Promise(resolve => {
@@ -45,7 +44,7 @@ class Starter {
         this._ticker = new PIXI.Ticker();
         this._ticker.start();
         this._ticker.add(() => {
-            this.tickerHandlersList.forEach(cb => cb());
+            this.emit('onTick');
             TWEEN.update();
         });
 

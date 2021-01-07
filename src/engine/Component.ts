@@ -13,8 +13,6 @@ class Component<T> implements ComponentInterface {
     readonly model: T;
     _container;
 
-
-
     constructor() {
         this._store = Store;
         this._starter = starterInstance;
@@ -29,7 +27,7 @@ class Component<T> implements ComponentInterface {
             this.onResize(data);
         });
 
-        this.starter.ticker.add(() => {
+        this.starter.on('onTick', () => {
             if (!this._container.visible) return;
             this.onTick();
         });
