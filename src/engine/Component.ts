@@ -1,16 +1,22 @@
 import starterInstance from './Starter';
 import GraphicsHelper from './utils/GraphicsHelper';
 import sceneManager from './managers/SceneManager';
+import { StoreInterface } from './models/StoreInterface';
+import Store from './Store';
+import {ComponentInterface} from './models/ComponentInterface';
 
-class Component {
+class Component<T> implements ComponentInterface {
     readonly _starter;
     readonly _graphicsHelper;
     readonly _sceneManager;
+    readonly _store: StoreInterface;
+    readonly model: T;
     _container;
 
 
 
     constructor() {
+        this._store = Store;
         this._starter = starterInstance;
         this._sceneManager = sceneManager;
         this._container = this.graphicsHelper.createContainer({});
@@ -67,6 +73,10 @@ class Component {
 
     get sceneManager() {
         return this._sceneManager;
+    }
+
+    get store() {
+        return this._store;
     }
 }
 

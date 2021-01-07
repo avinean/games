@@ -1,10 +1,11 @@
 import {
     Sprite, Container, Graphics, Circle, TextStyle, Text, Texture,
 } from 'pixi.js';
+// @ts-ignore
 import { IMAGES } from '@assets/images';
 
 export default class GraphicsHelper {
-    static createContainer(settings = {}) {
+    static createContainer(settings) {
         const {
             x = 0,
             y = 0,
@@ -22,7 +23,7 @@ export default class GraphicsHelper {
         return container;
     }
 
-    static createColorContainer(settings = {}) {
+    static createColorContainer(settings) {
         const {
             x = 0,
             y = 0,
@@ -75,7 +76,7 @@ export default class GraphicsHelper {
 
         console.log(name);
         const base64source = IMAGES[name];
-        const texture = Texture.fromLoader(base64source);
+        const texture = Texture.fromLoader(base64source, null, null);
         const sprite = new Sprite(texture);
 
         sprite.x = x;

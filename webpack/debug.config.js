@@ -15,7 +15,7 @@ module.exports = rootPath => ({
     // },
     devtool: 'inline-source-map',
 
-    entry: path.resolve(rootPath, 'index.ts'),
+    entry: path.resolve(rootPath, 'main.ts'),
 
     output: {
         filename: 'main.js?hash=[contenthash]',

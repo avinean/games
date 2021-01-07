@@ -1,11 +1,11 @@
-import Component from '@engine/Component';
+import Component from '../../../../engine/Component';
 
-import Button from '../components/Button';
-import { BackgroundEnums } from '../models/enums/BackgroundEnums';
-import { ButtonTypesEnum } from '../models/enums/ButtonTypesEnum';
-import { ScenesEnum } from '../models/enums/ScenesEnum';
+import Button from '../../components/Button';
+import { BackgroundEnums } from '../../models/enums/BackgroundEnums';
+import { ButtonTypesEnum } from '../../models/enums/ButtonTypesEnum';
+import { ScenesEnum } from '../../models/enums/ScenesEnum';
 
-class MainScene extends Component {
+class MainScene extends Component<any> {
     _background;
     _playButton;
     _time = 0;

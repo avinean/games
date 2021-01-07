@@ -1,6 +1,10 @@
 export interface SceneInterface {
     name: string;
     instance: any;
+    store?: {
+        name: string;
+        instance: any;
+    }
     isDefault?: boolean;
 }
 
